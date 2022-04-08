@@ -16,11 +16,11 @@ Give your users or admins access to features within your software / service and 
 Composer installation coming soon
 
 ```markdown
-composer install puppr
+composer require trench94/puppr
 ```
 
 ### Documentation
 
-[View our documentation](https://trench94.github.io/puppr/)
+[View our documentation](https://trench94.github.io/Puppr/)
 
 ### Support or Contact
