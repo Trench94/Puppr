@@ -13,7 +13,9 @@ Give your users or admins access to features within your software / service and 
 
 ## Installation
 
-Composer installation coming soon
+[Find us on Packagist.org](https://packagist.org/packages/trench94/puppr)
+
+Install with composer
 
 ```markdown
 composer require trench94/puppr
@@ -23,4 +25,6 @@ composer require trench94/puppr
 
 [View our documentation](https://trench94.github.io/Puppr/)
 
-### Support or Contact
+### Contribute
+[Take a look](https://github.com/Trench94/Puppr/issues) at our open issues if you want to contribute to our package
+
