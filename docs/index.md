@@ -1,3 +1,5 @@
+![Puppr logo](/puppr/docs/assets/images/puppr.png)
+
 ## Puppr
 
 You can use the [editor on GitHub](https://github.com/Trench94/puppr/edit/main/docs/index.md) to maintain and preview the content for your website in Markdown files.
