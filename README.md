@@ -1,11 +1,12 @@
-![Puppr logo](logo.png)
+<div class="intro" align="center">
 
-## Puppr
+<img src="./logo.png" align="center"/>
+<h2>Puppr</h2>
 
-Puppr is built on Laravel for modular SaaS applications.
+Puppr is built on Laravel and built to guard modular SaaS applications.
 
-Give your users / admins access to features within your software or service and prevent them from accessing functionality unless permitted.
-
+Give your users or admins access to features within your software / service and prevent them from accessing functionality unless permitted.
+</div>
 
 ### Installation
 
