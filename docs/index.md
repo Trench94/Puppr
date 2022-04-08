@@ -1,4 +1,4 @@
-![Puppr logo](/puppr/docs/assets/images/puppr.png)
+![Puppr logo](puppr.png)
 
 ## Puppr
 
