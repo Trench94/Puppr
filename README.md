@@ -15,10 +15,14 @@ Give your users or admins access to features within your software / service and 
 
 [Find us on Packagist.org](https://packagist.org/packages/trench94/puppr)
 
-Install with composer
+1. Install with composer
 
 ```markdown
 composer require trench94/puppr
+```
+2. Run the install command with artisan
+```markdown
+php artisan puppr:install
 ```
 
 ### Documentation
