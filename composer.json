@@ -1,0 +1,54 @@
+{
+    "name": "trench94/puppr",
+    "description": "Puppr is built for Laravel and used to guard modular SaaS applications",
+    "keywords": [
+        "trench94",
+        "puppr"
+    ],
+    "homepage": "https://github.com/trench94/puppr",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Luke Marshall",
+            "email": "marshall0694@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.4|^8.0",
+        "illuminate/support": "^8.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^6.0",
+        "phpunit/phpunit": "^9.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "trench94\\puppr\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "trench94\\puppr\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "trench94\\puppr\\PupprServiceProvider"
+            ],
+            "aliases": {
+                "Puppr": "trench94\\puppr\\PupprFacade"
+            }
+        }
+    }
+}
