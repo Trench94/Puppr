@@ -10,7 +10,7 @@ Give your users or admins access to features within your software / service and 
 
 <hr>
   
-## Package is in development (watch / star until a version 1.0 release)
+## Package is in development (watch / star until a version 1.0 release)<br><br>
 
 </div>
 
