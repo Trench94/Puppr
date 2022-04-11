@@ -8,6 +8,8 @@ Puppr is built for Laravel and used to guard modular SaaS applications.
 Give your users or admins access to features within your software / service and prevent them from accessing functionality unless permitted.
 
 <hr>
+  
+## Package is in development (watch / star until a version 1.0 release)
 
 </div>
 
