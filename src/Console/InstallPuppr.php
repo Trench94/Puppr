@@ -1,63 +1,76 @@
 <?php
 
-
-namespace App\Packages\trench94\puppr\src\Console;
+namespace Trench94\Puppr\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
+use Trench94\Puppr\PupprServiceProvider;
 
 class InstallPuppr extends Command
 {
+    protected $signature = 'puppr:install
+                            {--force : Overwrite an existing configuration file}
+                            {--migrate : Run the database migrations after publishing}';
 
-    protected $signature = 'puppr:install';
+    protected $description = 'Install Puppr: publish the configuration and migrations';
 
-    protected $description = 'Install Puppr into your project';
-
-    public function handle()
+    public function handle(): int
     {
         $this->info('Installing Puppr...');
 
-        $this->info('Publishing configuration...');
+        $this->publishConfiguration();
+        $this->publishMigrations();
 
-        if (! $this->configExists('puppr.php')) {
-            $this->publishConfiguration();
-            $this->info('Published configuration');
-        } else {
-            if ($this->shouldOverwriteConfig()) {
-                $this->info('Overwriting configuration file...');
-                $this->publishConfiguration($force = true);
-            } else {
-                $this->info('Existing configuration was not overwritten');
+        if ($this->option('migrate')) {
+            $this->call('migrate');
+        }
+
+        $this->newLine();
+        $this->info('Puppr installed.');
+
+        if (! $this->option('migrate')) {
+            $this->line('Next: run <comment>php artisan migrate</comment> to create the module tables.');
+        }
+
+        $this->line('Then add the <comment>Trench94\Puppr\Concerns\HasModules</comment> trait to your User model.');
+
+        return self::SUCCESS;
+    }
+
+    protected function publishConfiguration(): void
+    {
+        $exists = File::exists(config_path('puppr.php'));
+
+        if ($exists && ! $this->option('force')) {
+            if (! $this->confirm('config/puppr.php already exists. Overwrite it?', false)) {
+                $this->line('Existing configuration kept.');
+
+                return;
             }
         }
 
-        $this->info('Installed Puppr');
+        $this->callSilently('vendor:publish', [
+            '--provider' => PupprServiceProvider::class,
+            '--tag' => 'puppr-config',
+            '--force' => true,
+        ]);
+
+        $this->line($exists ? 'Configuration overwritten.' : 'Configuration published to config/puppr.php.');
     }
 
-    private function configExists($fileName)
+    protected function publishMigrations(): void
     {
-        return File::exists(config_path($fileName));
-    }
+        if (count(File::glob(database_path('migrations/*_create_puppr_tables.php'))) > 0) {
+            $this->line('Migrations already published.');
 
-    private function shouldOverwriteConfig()
-    {
-        return $this->confirm(
-            'Config file already exists. Do you want to overwrite it?',
-            false
-        );
-    }
-
-    private function publishConfiguration($forcePublish = false)
-    {
-        $params = [
-            '--provider' => "trench94\puppr\PupprServiceProvider",
-            '--tag' => "config"
-        ];
-
-        if ($forcePublish === true) {
-            $params['--force'] = true;
+            return;
         }
 
-        $this->call('vendor:publish', $params);
+        $this->callSilently('vendor:publish', [
+            '--provider' => PupprServiceProvider::class,
+            '--tag' => 'puppr-migrations',
+        ]);
+
+        $this->line('Migrations published.');
     }
 }

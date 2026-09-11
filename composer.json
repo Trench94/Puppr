@@ -1,9 +1,16 @@
 {
     "name": "trench94/puppr",
-    "description": "Puppr is built for Laravel and used to guard modular SaaS applications",
+    "description": "Feature-module access control for modular Laravel SaaS applications. Define modules, grant them to users or teams, and guard routes, views and gates.",
     "keywords": [
-        "trench94",
-        "puppr"
+        "laravel",
+        "saas",
+        "modules",
+        "features",
+        "feature-flags",
+        "access-control",
+        "authorization",
+        "puppr",
+        "trench94"
     ],
     "homepage": "https://github.com/trench94/puppr",
     "license": "MIT",
@@ -16,38 +23,46 @@
         }
     ],
     "require": {
-        "php": "^7.4|^8.0",
-        "illuminate/support": "^8.0"
+        "php": "^8.1",
+        "illuminate/auth": "^10.0|^11.0|^12.0",
+        "illuminate/console": "^10.0|^11.0|^12.0",
+        "illuminate/contracts": "^10.0|^11.0|^12.0",
+        "illuminate/database": "^10.0|^11.0|^12.0",
+        "illuminate/http": "^10.0|^11.0|^12.0",
+        "illuminate/routing": "^10.0|^11.0|^12.0",
+        "illuminate/support": "^10.0|^11.0|^12.0",
+        "illuminate/view": "^10.0|^11.0|^12.0"
     },
     "require-dev": {
-        "orchestra/testbench": "^6.0",
-        "phpunit/phpunit": "^9.0"
+        "orchestra/testbench": "^8.0|^9.0|^10.0",
+        "phpunit/phpunit": "^10.0|^11.0"
     },
     "autoload": {
         "psr-4": {
-            "trench94\\puppr\\": "src"
+            "Trench94\\Puppr\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "trench94\\puppr\\Tests\\": "tests"
+            "Trench94\\Puppr\\Tests\\": "tests"
         }
     },
     "scripts": {
         "test": "vendor/bin/phpunit",
         "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
-
     },
     "config": {
         "sort-packages": true
     },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
     "extra": {
         "laravel": {
             "providers": [
-                "trench94\\puppr\\PupprServiceProvider"
+                "Trench94\\Puppr\\PupprServiceProvider"
             ],
             "aliases": {
-                "Puppr": "trench94\\puppr\\PupprFacade"
+                "Puppr": "Trench94\\Puppr\\PupprFacade"
             }
         }
     }
