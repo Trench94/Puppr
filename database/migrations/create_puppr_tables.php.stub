@@ -1,0 +1,45 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        $tables = config('puppr.tables');
+
+        Schema::create($tables['modules'], function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('slug')->unique();
+            $table->text('description')->nullable();
+            $table->boolean('active')->default(true);
+            $table->timestamps();
+        });
+
+        Schema::create($tables['module_access'], function (Blueprint $table) use ($tables) {
+            $table->id();
+            $table->foreignId('module_id')->constrained($tables['modules'])->cascadeOnDelete();
+            $table->morphs('accessor');
+            $table->timestamps();
+
+            $table->unique(['module_id', 'accessor_type', 'accessor_id'], 'module_access_unique');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        $tables = config('puppr.tables');
+
+        Schema::dropIfExists($tables['module_access']);
+        Schema::dropIfExists($tables['modules']);
+    }
+};
