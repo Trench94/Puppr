@@ -41,7 +41,11 @@ jobs:
           coverage: none
 
       - name: Install dependencies
+        # Composer 2.9+ refuses to install packages with known security advisories.
+        # Laravel 10 and 11 are end-of-life and every release is flagged, so the
+        # policy has to be relaxed for the test matrix to install them at all.
         run: |
+          composer config policy.advisories.block false
           composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
           composer update --prefer-dist --no-interaction --no-progress
 

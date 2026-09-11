@@ -60,7 +60,7 @@ class ModuleTest extends TestCase
 
         $user->grantModule($module);
 
-        $this->assertSame([$user->id], $module->accessors(User::class)->pluck('id')->all());
+        $this->assertSame([$user->id], $module->accessors(User::class)->get()->modelKeys());
     }
 
     public function test_it_uses_the_configured_table_name(): void
